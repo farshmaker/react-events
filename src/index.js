@@ -1,15 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const el = (
-    <div>
-        <h1>Event List</h1>
-        <input placeholder="search" />
+const EventList = () => {
+    return (
         <ul>
             <li>Mozgo</li>
             <li>Lazertag</li>
         </ul>
-    </div>
-);
+    );
+};
 
-ReactDOM.render(el, document.getElementById('root'));
+const AppHeader = () => {
+    return <h1>Event List</h1>;
+};
+
+const SearchPanel = () => {
+    return <input placeholder="search" />;
+};
+
+const App = () => {
+    return (
+        <div>
+            <AppHeader />
+            <SearchPanel />
+            <EventList />
+        </div>
+    );
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));
