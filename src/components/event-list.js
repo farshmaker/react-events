@@ -7,9 +7,9 @@ const EventList = () => {
 
     return (
         <ul>
-            <li><EventListItem /></li>
-            <li><EventListItem /></li>
-            <li><EventListItem /></li>
+            <li><EventListItem label = 'Mozgo'/></li>
+            <li><EventListItem label = 'Lazertag' important/></li>
+            <li><EventListItem label = 'Questroom'/></li>
         </ul>
     );
 };
