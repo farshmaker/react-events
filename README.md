@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+![Alt text](https://github.com/farshmaker/react-todo/blob/master/img/todo-app.PNG?raw=true?raw=true "Optional Title")
+
 ## Available Scripts
 
 In the project directory, you can run:
