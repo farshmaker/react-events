@@ -5,6 +5,7 @@ import SearchPanel from '../search-panel';
 import TodoList from '../todo-list';
 import ItemStatusFilter from '../item-status-filter';
 import ItemAddForm from '../item-add-form';
+import TaskService from '../../services/todo-service'
 
 import './app.css';
 
@@ -13,13 +14,14 @@ export default class App extends Component {
     maxId = 100;
 
     state = {
-        tasks: [
-            this.createTaskItem('Mozgo'),
-            this.createTaskItem('Lazertag'),
-            this.createTaskItem('Questroom')
-        ],
+        tasks: [],
         searchText: '',
         status: 'all' //active, all, done
+    };
+
+    componentWillMount() {
+        const taskService = new TaskService();
+        taskService.getAllTasks().then(({_embedded : {taskList}}) => this.setState({tasks : taskList}));
     };
 
     createTaskItem(label) {
@@ -31,7 +33,9 @@ export default class App extends Component {
     };
 
     addItem = (text) => {
+        const taskService = new TaskService();
         const newItem = this.createTaskItem(text);
+        taskService.addTask({label: text});
 
         this.setState(({ tasks }) => {
             const newArray = [
@@ -46,6 +50,8 @@ export default class App extends Component {
     }
 
     deleteItem = (id) => {
+        const taskService = new TaskService();
+        taskService.deleteTask(id);
         this.setState(({ tasks }) => {
             const idx = tasks.findIndex((el) => el.id === id);
 
@@ -62,8 +68,10 @@ export default class App extends Component {
     };
 
     toggleProperty(arr, id, propName) {
+        const taskService = new TaskService();
         const idx = arr.findIndex((el) => el.id === id);
         const oldItem = arr[idx];
+        taskService.toggleProps(id, {[propName]: !oldItem[propName]});
         const newItem = { ...oldItem, [propName]: !oldItem[propName] };
 
         return [
